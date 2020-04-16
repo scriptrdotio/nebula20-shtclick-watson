@@ -9,7 +9,7 @@ git clone https://github.com/scriptrdotio/nebula20-shtclick-watson.git
 3. Copy cloned project into your workspace
 4. Configure your wifi connection under apps/nebula/bluemix_iot_sensors/wifi_config_dct.h by setting CLIENT_AP_SSID and CLIENT_AP_PASSPHRASE
 5. Copy paste your token from scriptr's workspace into apps/nebula/bluemix_iot_sensors/bluemix_dct.c (replace the word <Token> )
-6. Generate a new build target by clicking on "new" under "Make Target" and naming it "nebula.scriptr-NEB1DX_02 download download_apps run"
+6. Generate a new build target by clicking on "new" under "Make Target" and naming it "nebula.bluemix_iot_sensors-NEB1DX_02 download download_apps run"
 7. Run the build
 
 The code is built using the following

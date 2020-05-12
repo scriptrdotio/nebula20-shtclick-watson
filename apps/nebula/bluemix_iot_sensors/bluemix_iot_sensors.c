@@ -94,7 +94,9 @@
 	{ (char*) "save_mqtt_settings", save_mqtt_settings, 0, NULL, NULL, (char *)"",                                             (char *)"Save all the MQTT/Bluemix settings" }, \
 	{ (char*) "sub_topic",          sub_topic,          1, NULL, NULL, (char *)"<subscribe_topic>",                            (char *)"Subscribe to an MQTT topic (try \"iot-2/cmd/+/fmt/+\")" }, \
 
-
+#ifndef WICED_MQTT_EVENT_TYPE_SUBSCRIBED
+#define WICED_MQTT_EVENT_TYPE_SUBSCRIBED WICED_MQTT_EVENT_TYPE_SUBCRIBED
+#endif
 /******************************************************************************
  *                                Structures
  ******************************************************************************/
@@ -319,7 +321,7 @@ static wiced_result_t mqtt_app_subscribe( wiced_mqtt_object_t mqtt_obj, char *to
     {
         return WICED_ERROR;
     }
-    if ( wait_for_response( WICED_MQTT_EVENT_TYPE_SUBCRIBED, MQTT_REQUEST_TIMEOUT ) != WICED_SUCCESS )
+    if ( wait_for_response( WICED_MQTT_EVENT_TYPE_SUBSCRIBED, MQTT_REQUEST_TIMEOUT ) != WICED_SUCCESS )
     {
         return WICED_ERROR;
     }
@@ -352,7 +354,7 @@ static wiced_result_t mqtt_connection_event_cb( wiced_mqtt_object_t mqtt_object,
         case WICED_MQTT_EVENT_TYPE_CONNECT_REQ_STATUS:
         case WICED_MQTT_EVENT_TYPE_DISCONNECTED:
         case WICED_MQTT_EVENT_TYPE_PUBLISHED:
-        case WICED_MQTT_EVENT_TYPE_SUBCRIBED:
+        case WICED_MQTT_EVENT_TYPE_SUBSCRIBED:
         case WICED_MQTT_EVENT_TYPE_UNSUBSCRIBED:
         {
         	if(event->type == WICED_MQTT_EVENT_TYPE_DISCONNECTED){
@@ -744,7 +746,8 @@ void application_start( void )
     }
 
     while(1){
-    	wiced_rtos_delay_milliseconds( 10000 );
+    	wiced_rtos_delay_milliseconds( 1000000 );
+    	WPRINT_APP_INFO(("PING!"));
 
     	if(!wiced_network_is_up(WICED_STA_INTERFACE)){
     		connect_wifi_if_set(WICED_FALSE);
@@ -759,4 +762,3 @@ void application_start( void )
 
     return;
 }
-

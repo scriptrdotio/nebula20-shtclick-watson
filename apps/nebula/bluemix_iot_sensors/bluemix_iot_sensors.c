@@ -94,9 +94,8 @@
 	{ (char*) "save_mqtt_settings", save_mqtt_settings, 0, NULL, NULL, (char *)"",                                             (char *)"Save all the MQTT/Bluemix settings" }, \
 	{ (char*) "sub_topic",          sub_topic,          1, NULL, NULL, (char *)"<subscribe_topic>",                            (char *)"Subscribe to an MQTT topic (try \"iot-2/cmd/+/fmt/+\")" }, \
 
-#ifndef WICED_MQTT_EVENT_TYPE_SUBSCRIBED
-#define WICED_MQTT_EVENT_TYPE_SUBSCRIBED WICED_MQTT_EVENT_TYPE_SUBCRIBED
-#endif
+#define WICED_MQTT_EVENT_TYPE_SUBSCRIBED 4
+
 /******************************************************************************
  *                                Structures
  ******************************************************************************/
